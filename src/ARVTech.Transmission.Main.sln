@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARVTech.Transmission.Console", "ARVTech.Transmission.Console\ARVTech.Transmission.Console.csproj", "{EB28113F-09BF-485B-903C-FE94DC74A3C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARVTech.Transmission.Engine", "ARVTech.Transmission.Engine\ARVTech.Transmission.Engine.csproj", "{C969D432-3DEF-4797-8216-3F67A671977F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB28113F-09BF-485B-903C-FE94DC74A3C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB28113F-09BF-485B-903C-FE94DC74A3C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB28113F-09BF-485B-903C-FE94DC74A3C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB28113F-09BF-485B-903C-FE94DC74A3C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C969D432-3DEF-4797-8216-3F67A671977F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C969D432-3DEF-4797-8216-3F67A671977F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C969D432-3DEF-4797-8216-3F67A671977F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C969D432-3DEF-4797-8216-3F67A671977F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4EE6E7BA-DBC0-4CB2-A1B6-D74981002F19}
+	EndGlobalSection
+EndGlobal
