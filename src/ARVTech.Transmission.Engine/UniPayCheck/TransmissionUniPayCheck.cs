@@ -43,6 +43,10 @@
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TransmissionUniPayCheck"/> class.
+        /// </summary>
+        /// <param name="pathDirectoryOrFileName">Path`s Directory or Filename to be processed. If it is a Directory, all files that are there will be considered. Otherwise, if it is a single file, it will only be considered.</param>
         public TransmissionUniPayCheck(string pathDirectoryOrFileName)
         {
             try
