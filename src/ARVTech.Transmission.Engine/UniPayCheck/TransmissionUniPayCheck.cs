@@ -71,8 +71,10 @@
 
                     this._isFile = true;
                 }
-                else if (Directory.Exists(pathDirectoryOrFileName)) // Is Folder (Coletive).
+                else if (Directory.Exists(pathDirectoryOrFileName)) // Is Folder (Collective).
                 {
+                    string x = string.Empty;
+
                     this._filesDemonstrativoPagamento = Directory.EnumerateFiles(
                         pathDirectoryOrFileName,
                         this._searchPatternDemonstrativoPagamento,
