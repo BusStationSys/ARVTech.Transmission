@@ -73,8 +73,6 @@
                 }
                 else if (Directory.Exists(pathDirectoryOrFileName)) // Is Folder (Collective).
                 {
-                    string x = string.Empty;
-
                     this._filesDemonstrativoPagamento = Directory.EnumerateFiles(
                         pathDirectoryOrFileName,
                         this._searchPatternDemonstrativoPagamento,
@@ -89,7 +87,7 @@
                 }
                 else
                 {
-                    throw new FileNotFoundException($@"Arquivo {pathDirectoryOrFileName} não encontrado.");
+                    throw new FileNotFoundException($@"Diretório ou Arquivo {pathDirectoryOrFileName} não encontrado.");
                 }
 
                 this._pathDirectoryOrFileName = pathDirectoryOrFileName;
