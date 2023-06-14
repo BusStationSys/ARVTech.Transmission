@@ -1,10 +1,10 @@
-﻿namespace ARVTech.Transmission.Engine
+﻿namespace ARVTech.Transmission.Engine.EquHos
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
 
-    public class EquHos : ITransmissionEngine
+	public class TransmissionEquHos
     {
         public void Executar()
         {
