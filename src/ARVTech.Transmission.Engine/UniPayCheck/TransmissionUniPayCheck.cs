@@ -77,11 +77,6 @@
                         pathDirectoryOrFileName,
                         this._searchPatternDemonstrativoPagamento,
                         SearchOption.TopDirectoryOnly).ToList();
-                    //.Where(s => s.EndsWith(".txt") && s.Count(c => c == '.') == 2)
-                    //.Where(s => s.EndsWith(
-                    //    ".txt",
-                    //    StringComparison.InvariantCultureIgnoreCase))
-                    //.ToList();
 
                     this._filesEspelhoPonto = Directory.EnumerateFiles(
                         pathDirectoryOrFileName,
@@ -92,7 +87,7 @@
                 }
                 else
                 {
-
+                    throw new FileNotFoundException($@"Arquivo {pathDirectoryOrFileName} não encontrado.");
                 }
 
                 this._pathDirectoryOrFileName = pathDirectoryOrFileName;
@@ -104,7 +99,7 @@
         }
 
         /// <summary>
-        /// 
+        /// Collective or Individual.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<DemonstrativoPagamentoResult> GetDemonstrativosPagamento()
@@ -197,7 +192,7 @@
         }
 
         /// <summary>
-        /// 
+        /// Collective or Individual.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<DemonstrativoPagamentoResult> GetEspelhosPonto()
