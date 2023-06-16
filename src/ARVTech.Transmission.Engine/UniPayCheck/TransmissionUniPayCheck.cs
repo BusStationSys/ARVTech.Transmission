@@ -16,7 +16,7 @@
         private readonly List<string> _filesDemonstrativoPagamento = null;
         private readonly List<string> _filesEspelhoPonto = null;
 
-        private readonly string _searchPatternDemonstrativoPagamento = "Contracheque*.txt";
+        private readonly string _searchPatternDemonstrativoPagamento = "DemonstrativoPagamento*.txt";
         private readonly string _searchPatternEspelhoPonto = "EspelhoPonto*.txt";
 
         public bool IsDirectory
@@ -195,7 +195,7 @@
         /// Collective or Individual.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<DemonstrativoPagamentoResult> GetEspelhosPonto()
+        public IEnumerable<EspelhoPontoResult> GetEspelhosPonto()
         {
             try
             {
@@ -207,9 +207,7 @@
                             this._filesEspelhoPonto));
                 }
 
-                return null;
-
-                //var espelhosPontoResult = new List<espelhopontoResult>();
+                var espelhosPontoResult = new List<EspelhoPontoResult>();
 
                 //var demonstrativoPagamento = new DemonstrativoPagamentoResult();
 
@@ -272,7 +270,7 @@
                 //    }
                 //}
 
-                //return demonstrativosPagamentoResult;
+                return espelhosPontoResult;
             }
             catch
             {
