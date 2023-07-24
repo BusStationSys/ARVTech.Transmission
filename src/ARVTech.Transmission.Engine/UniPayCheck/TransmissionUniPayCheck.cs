@@ -13,8 +13,8 @@
 
         private readonly string _pathDirectoryOrFileName;
 
-        private readonly List<string> _filesDemonstrativoPagamento = null;
-        private readonly List<string> _filesEspelhoPonto = null;
+        private readonly List<string> _filesDemonstrativoPagamento;
+        private readonly List<string> _filesEspelhoPonto;
 
         private readonly string _searchPatternDemonstrativoPagamento = "DemonstrativoPagamento*.txt";
         private readonly string _searchPatternEspelhoPonto = "EspelhoPonto*.txt";
