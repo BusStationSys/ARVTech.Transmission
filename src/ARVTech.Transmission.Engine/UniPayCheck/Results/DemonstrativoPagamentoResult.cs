@@ -16,9 +16,9 @@
 
         public string Nome { get; set; }
 
-        public string Cargo { get; set; }
+        public string DescricaoCargo { get; set; }
 
-        public string Setor { get; set; }
+        public string DescricaoSetor { get; set; }
 
         public string NumeroCtps { get; set; }
 
@@ -40,7 +40,7 @@
 
         public string Conta { get; set; }
 
-        public List<Evento> Eventos { get; set; }
+        public List<DemonstrativoPagamentoEventoResult> Eventos { get; set; }
 
         public string BaseFgts { get; set; }
 
@@ -63,7 +63,7 @@
         }
     }
 
-    public class Evento
+    public class DemonstrativoPagamentoEventoResult
     {
         public string Codigo { get; set; }
 
