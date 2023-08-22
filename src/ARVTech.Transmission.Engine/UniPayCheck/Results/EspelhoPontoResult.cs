@@ -17,31 +17,47 @@
         public string RazaoSocial { get; set; }
 
         public List<EspelhoPontoMarcacaoResult> Marcacoes { get; set; }
+
+        public string TotalHE050 { get; set; }
+
+        public string TotalHE070 { get; set; }
+
+        public string TotalHE100 { get; set; }
+
+        public string TotalAdicionalNoturno { get; set; }
+
+        public string TotalAtestado { get; set; }
+
+        public string TotalPaternidade { get; set; }
+
+        public string TotalSeguro { get; set; }
+
+        public string TotalFaltas { get; set; }
+
+        public string TotalFaltasJustificadas { get; set; }
+
+        public string TotalAtrasos { get; set; }
+
+        public string TotalCreditoBH { get; set; }
+
+        public string TotalDebitoBH { get; set; }
+
+        public string TotalSaldoBH { get; set; }
+
+        public string TotalDispensaNaoRemunerada { get; set; }
+
+        public string TotalGratAdFech { get; set; }
     }
 
     public class EspelhoPontoMarcacaoResult
     {
-        public DateTime DataMarcacao { get; set; }
+        public DateTime Data { get; set; }
 
-        public string HorarioMarcacao1 { get; set; }
+        public string Marcacao { get; set; }
 
-        public string HorarioMarcacao2 { get; set; }
+        public string HorasNormais { get; set; }
 
-        public string HorarioMarcacao3 { get; set; }
-
-        public string HorarioMarcacao4 { get; set; }
-
-        public string HorarioMarcacao5 { get; set; }
-
-        public string HorarioMarcacao6 { get; set; }
-
-        public string HorarioMarcacao7 { get; set; }
-
-        public string HorarioMarcacao8 { get; set; }
-
-        public string Trabalhadas { get; set; }
-
-        public string Faltas { get; set; }
+        public string HorasFaltas { get; set; }
 
         public string HE050 { get; set; }
 

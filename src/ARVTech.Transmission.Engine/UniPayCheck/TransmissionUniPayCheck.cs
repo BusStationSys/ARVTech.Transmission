@@ -5,7 +5,6 @@
     using System.IO;
     using System.Linq;
     using System.Text;
-    using ARVTech.Shared.Extensions;
     using ARVTech.Transmission.Engine.UniPayCheck.Results;
 
     public class TransmissionUniPayCheck
@@ -20,15 +19,6 @@
 
         private readonly string _searchPatternDemonstrativoPagamento = "DemonstrativoPagamento*.txt";
         private readonly string _searchPatternEspelhoPonto = "EspelhoPonto*.txt";
-
-        private readonly List<string> _ocorrenciasEspelhoPonto = new()
-        {
-            "ATESTADO",
-            "COMPENSADO",
-            "DEBITO BH",
-            "DESCANSO",
-            "NORMAL",
-        };
 
         public bool IsDirectory
         {
@@ -224,10 +214,13 @@
 
                 foreach (var fileEspelhoPonto in this._filesEspelhoPonto)
                 {
+                    //var lines = File.ReadAllLines(
+                    //    fileEspelhoPonto,
+                    //    Encoding.GetEncoding(
+                    //        "ISO-8859-1"));
+
                     var lines = File.ReadAllLines(
-                        fileEspelhoPonto,
-                        Encoding.GetEncoding(
-                            "ISO-8859-1"));
+                        fileEspelhoPonto);
 
                     //using (var streamReader = new StreamReader(
                     //    fileEspelho,
@@ -245,13 +238,13 @@
                         {
                             espelhoPonto = new EspelhoPontoResult
                             {
-                                Matricula = line.Substring(1, 10).Trim().TreatStringWithAccent(),
-                                Nome = line.Substring(11, 40).Trim().TreatStringWithAccent(),
-                                DescricaoSetor = line.Substring(57, 34).Trim().TreatStringWithAccent(),
+                                Matricula = line.Substring(1, 10).Trim(),
+                                Nome = line.Substring(11, 40).Trim(),
+                                DescricaoSetor = line.Substring(57, 34).Trim(),
                                 CargaHoraria = line.Substring(113, 6).Trim().Replace(":", "."),
                                 Cnpj = this.replaceSetorByCnpj(
                                     line.Substring(121, 13).Trim()),
-                                Competencia = line.Substring(134, 8).Trim(),
+                                Competencia = line.Substring(134, 7).Trim(),
                             };
 
                             competencia = espelhoPonto.Competencia;
@@ -260,30 +253,21 @@
                         {
                             var espelhoPontoMarcacaoResult = new EspelhoPontoMarcacaoResult
                             {
-                                DataMarcacao = Convert.ToDateTime(
+                                Data = Convert.ToDateTime(
                                     string.Concat(
                                         Convert.ToInt32(
                                             line.Substring(1, 2).Trim()).ToString("00"),
                                         "/",
                                         competencia)),
+                                Marcacao = line.Substring(8, 82).Trim(),
+                                HorasNormais = line.Substring(90, 5).Trim(),
+                                HorasFaltas = line.Substring(96, 5).Trim(),
+                                HE050 = line.Substring(102, 5).Trim(),
+                                HE070 = line.Substring(108, 5).Trim(),
+                                HE100 = line.Substring(114, 5).Trim(),
+                                CreditoBH = line.Substring(120, 5).Trim(),
+                                DebitoBH = line.Substring(126, 5).Trim(),
                             };
-
-                            string marcacao = line.Substring(8, 82).Trim();
-
-                            int positionOcorrenciaMarcacao = getPositionOcorrenciaMarcacao(marcacao);
-
-                            if (positionOcorrenciaMarcacao >= 0)
-                            {
-                                marcacao = marcacao.Substring(0, positionOcorrenciaMarcacao).Trim();
-                            }
-
-                            if (!string.IsNullOrEmpty(marcacao))
-                            {
-                                espelhoPontoMarcacaoResult.HorarioMarcacao1 = marcacao.Substring(0, 5).Trim();
-                                espelhoPontoMarcacaoResult.HorarioMarcacao2 = marcacao.Substring(6, 5).Trim();
-                                espelhoPontoMarcacaoResult.HorarioMarcacao3 = marcacao.Substring(12, 5).Trim();
-                                espelhoPontoMarcacaoResult.HorarioMarcacao4 = marcacao.Substring(18, 5).Trim();
-                            }
 
                             if (espelhoPonto.Marcacoes is null)
                                 espelhoPonto.Marcacoes = new List<EspelhoPontoMarcacaoResult>();
@@ -293,6 +277,22 @@
                         }
                         else if (line.Substring(0, 1) == "3")
                         {
+                            espelhoPonto.TotalHE050 = line.Substring(1, 10).Trim();
+                            espelhoPonto.TotalHE070 = line.Substring(11, 10).Trim();
+                            espelhoPonto.TotalHE100 = line.Substring(21, 10).Trim();
+                            espelhoPonto.TotalAdicionalNoturno = line.Substring(31, 10).Trim();
+                            espelhoPonto.TotalAtestado = line.Substring(41, 10).Trim();
+                            espelhoPonto.TotalPaternidade = line.Substring(51, 10).Trim();
+                            espelhoPonto.TotalSeguro = line.Substring(61, 10).Trim();
+                            espelhoPonto.TotalFaltas = line.Substring(71, 10).Trim();
+                            espelhoPonto.TotalFaltasJustificadas = line.Substring(81, 10).Trim();
+                            espelhoPonto.TotalAtrasos = line.Substring(91, 10).Trim();
+                            espelhoPonto.TotalCreditoBH = line.Substring(101, 10).Trim();
+                            espelhoPonto.TotalDebitoBH = line.Substring(111, 10).Trim();
+                            espelhoPonto.TotalSaldoBH = line.Substring(121, 10).Trim();
+                            espelhoPonto.TotalDispensaNaoRemunerada = line.Substring(131, 10).Trim();
+                            espelhoPonto.TotalGratAdFech = line.Substring(141).Trim();
+
                             espelhosPontoResult.Add(
                                 espelhoPonto);
                         }
@@ -318,24 +318,6 @@
                 return "07718633000189";
 
             return string.Empty;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="marcacao"></param>
-        /// <returns></returns>
-        private int getPositionOcorrenciaMarcacao(string marcacao)
-        {
-            foreach (var ocorrenciaEspelhoPonto in this._ocorrenciasEspelhoPonto)
-            {
-                if (marcacao.ToUpper().IndexOf(ocorrenciaEspelhoPonto.ToUpper()) >= 0)
-                {
-                    return marcacao.ToUpper().IndexOf(ocorrenciaEspelhoPonto.ToUpper());
-                }
-            }
-
-            return -1;
         }
     }
 }
