@@ -20,6 +20,9 @@
         private readonly string _searchPatternDemonstrativoPagamento = "DemonstrativoPagamento*.txt";
         private readonly string _searchPatternEspelhoPonto = "EspelhoPonto*.txt";
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsDirectory
         {
             get
@@ -28,6 +31,9 @@
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsFile
         {
             get
@@ -36,6 +42,9 @@
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string PathDirectoryOrFileName
         {
             get
@@ -244,6 +253,8 @@
                                 CargaHoraria = line.Substring(113, 6).Trim().Replace(":", "."),
                                 Cnpj = this.replaceSetorByCnpj(
                                     line.Substring(121, 13).Trim()),
+                                RazaoSocial = this.replaceSetorByRazaoSocial(
+                                    line.Substring(121, 13).Trim()),
                                 Competencia = line.Substring(134, 7).Trim(),
                             };
 
@@ -316,6 +327,19 @@
         {
             if (content.Trim().ToUpper() == "MATRIZ")
                 return "07718633000189";
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        private string replaceSetorByRazaoSocial(string content)
+        {
+            if (content.Trim().ToUpper() == "MATRIZ")
+                return "UNIDASUL DIST ALIMENTICIA S.A. MTZ";
 
             return string.Empty;
         }
