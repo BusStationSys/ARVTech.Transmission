@@ -119,9 +119,10 @@
                 if (this._filesDemonstrativoPagamento is null ||
                     this._filesDemonstrativoPagamento.Count == 0)
                 {
-                    throw new NullReferenceException(
-                        nameof(
-                            this._filesDemonstrativoPagamento));
+                    return null;
+                    //throw new NullReferenceException(
+                    //    nameof(
+                    //        this._filesDemonstrativoPagamento));
                 }
 
                 var demonstrativosPagamentoResult = new List<DemonstrativoPagamentoResult>();
@@ -212,9 +213,10 @@
                 if (this._filesEspelhoPonto is null ||
                     this._filesEspelhoPonto.Count == 0)
                 {
-                    throw new NullReferenceException(
-                        nameof(
-                            this._filesEspelhoPonto));
+                    return null;
+                    //throw new NullReferenceException(
+                    //    nameof(
+                    //        this._filesEspelhoPonto));
                 }
 
                 var espelhosPontoResult = new List<EspelhoPontoResult>();
