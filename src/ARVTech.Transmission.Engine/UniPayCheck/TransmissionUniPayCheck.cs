@@ -302,7 +302,22 @@
                             espelhoPonto.TotalAtrasos = line.Substring(91, 10).Trim();
                             espelhoPonto.TotalCreditoBH = line.Substring(101, 10).Trim();
                             espelhoPonto.TotalDebitoBH = line.Substring(111, 10).Trim();
-                            espelhoPonto.TotalSaldoBH = line.Substring(121, 10).Trim();
+
+                            espelhoPonto.TotalSaldoBH = line.Substring(121, 10).Replace(
+                                "+",
+                                string.Empty).Trim();
+
+                            if (espelhoPonto.TotalSaldoBH.IndexOf("-") > -1)
+                            {
+                                espelhoPonto.TotalSaldoBH = line.Substring(121, 10).Replace(
+                                    "-",
+                                    string.Empty).Trim();
+
+                                espelhoPonto.TotalSaldoBH = string.Concat(
+                                    "-",
+                                    espelhoPonto.TotalSaldoBH);
+                            }
+
                             espelhoPonto.TotalDispensaNaoRemunerada = line.Substring(131, 10).Trim();
                             espelhoPonto.TotalGratAdFech = line.Substring(141).Trim();
 
