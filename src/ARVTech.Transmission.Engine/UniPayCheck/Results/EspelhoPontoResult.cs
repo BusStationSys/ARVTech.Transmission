@@ -55,7 +55,7 @@
 
         public string Marcacao { get; set; }
 
-        public string HorasNormais { get; set; }
+        public string HorasTrabalhadas { get; set; }
 
         public string HorasFaltas { get; set; }
 

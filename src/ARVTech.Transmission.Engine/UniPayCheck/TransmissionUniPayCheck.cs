@@ -273,7 +273,7 @@
                                         "/",
                                         competencia)),
                                 Marcacao = line.Substring(8, 82).Trim(),
-                                HorasNormais = line.Substring(90, 5).Trim(),
+                                HorasTrabalhadas = line.Substring(90, 5).Trim(),
                                 HorasFaltas = line.Substring(96, 5).Trim(),
                                 HE050 = line.Substring(102, 5).Trim(),
                                 HE070 = line.Substring(108, 5).Trim(),
