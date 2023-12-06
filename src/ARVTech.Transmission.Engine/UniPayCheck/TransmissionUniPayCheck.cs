@@ -14,9 +14,11 @@
 
         private readonly string _pathDirectoryOrFileName;
 
+        private readonly List<string> _filesMatricula;
         private readonly List<string> _filesDemonstrativoPagamento;
         private readonly List<string> _filesEspelhoPonto;
 
+        private readonly string _searchPatternMatricula = "Matricula*.txt";
         private readonly string _searchPatternDemonstrativoPagamento = "DemonstrativoPagamento*.txt";
         private readonly string _searchPatternEspelhoPonto = "EspelhoPonto*.txt";
 
@@ -68,11 +70,15 @@
                             pathDirectoryOrFileName));
                 }
 
+                this._filesMatricula = new List<string>();
                 this._filesDemonstrativoPagamento = new List<string>();
                 this._filesEspelhoPonto = new List<string>();
 
                 if (File.Exists(pathDirectoryOrFileName))   // Is File (Individual).
                 {
+                    this._filesMatricula.Add(
+                        pathDirectoryOrFileName);
+
                     this._filesDemonstrativoPagamento.Add(
                         pathDirectoryOrFileName);
 
@@ -83,6 +89,11 @@
                 }
                 else if (Directory.Exists(pathDirectoryOrFileName)) // Is Folder (Collective).
                 {
+                    this._filesMatricula = Directory.EnumerateFiles(
+                        pathDirectoryOrFileName,
+                        this._searchPatternMatricula,
+                        SearchOption.TopDirectoryOnly).ToList();
+
                     this._filesDemonstrativoPagamento = Directory.EnumerateFiles(
                         pathDirectoryOrFileName,
                         this._searchPatternDemonstrativoPagamento,
@@ -96,9 +107,7 @@
                     this._isDirectory = true;
                 }
                 else
-                {
                     throw new FileNotFoundException($@"Diretório ou Arquivo {pathDirectoryOrFileName} não encontrado.");
-                }
 
                 this._pathDirectoryOrFileName = pathDirectoryOrFileName;
             }
@@ -328,6 +337,61 @@
                 }
 
                 return espelhosPontoResult;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Collective or Individual.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<MatriculaResult> GetMatriculas()
+        {
+            try
+            {
+                if (this._filesMatricula is null ||
+                    this._filesMatricula.Count == 0)
+                    return null;
+
+                var matriculasResult = new List<MatriculaResult>();
+
+                foreach (var fileMatricula in this._filesMatricula)
+                {
+                    var lines = File.ReadAllLines(
+                        fileMatricula);
+
+                    foreach (var line in lines)
+                    {
+                        matriculasResult.Add(
+                            new MatriculaResult()
+                            {
+                                Matricula = line.Substring(0, 8).Trim(),
+                                Nome = line.Substring(9, 35).Trim(),
+                                DataNascimento = line.Substring(45, 10).Trim(),
+                                Cep = line.Substring(58, 10).Trim(),
+                                Email = line.Substring(69, 28).Trim(),
+                                Telefone = line.Substring(98, 27).Trim(),
+                                Cpf = line.Substring(126, 14).Trim(),
+                                DataDemissao = line.Substring(141, 10).Trim(),
+                                DataAdmissao = line.Substring(152, 10).Trim(),
+                                Complemento = line.Substring(163, 23).Trim(),
+                                NumeroLogradouro = line.Substring(185, 6).Trim(),
+                                Bairro = line.Substring(192, 20).Trim(),
+                                Logradouro = line.Substring(213, 30).Trim(),
+                                Cidade = line.Substring(244, 18).Trim(),
+                                Uf = line.Substring(263, 2).Trim(),
+                                NumeroCtps = line.Substring(266, 9).Trim(),
+                                SerieCtps = line.Substring(276, 6).Trim(),
+                                UfCtps = line.Substring(283, 2).Trim(),
+                                Rg = line.Substring(286, 15).Trim(),
+                            });
+                    }
+                }
+
+                return matriculasResult;
             }
             catch
             {
