@@ -1,9 +1,9 @@
 ﻿namespace ARVTech.Transmission.Engine.UniPayCheck.Results
 {
-    using System.Collections.Generic;
-
     public class MatriculaResult
     {
+        public string Cnpj { get; set; }
+
         public string Matricula { get; set; }
 
         public string Nome { get; set; }
@@ -41,5 +41,11 @@
         public string UfCtps { get; set; }
 
         public string Rg { get; set; }
+
+        public string DescricaoCargo { get; set; }
+
+        public string DescricaoSetor { get; set; }
+
+        public string SalarioNominal { get; set; }
     }
 }

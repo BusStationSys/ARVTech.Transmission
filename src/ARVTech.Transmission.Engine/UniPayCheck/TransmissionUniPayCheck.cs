@@ -127,12 +127,7 @@
             {
                 if (this._filesDemonstrativoPagamento is null ||
                     this._filesDemonstrativoPagamento.Count == 0)
-                {
                     return null;
-                    //throw new NullReferenceException(
-                    //    nameof(
-                    //        this._filesDemonstrativoPagamento));
-                }
 
                 var demonstrativosPagamentoResult = new List<DemonstrativoPagamentoResult>();
 
@@ -221,12 +216,7 @@
             {
                 if (this._filesEspelhoPonto is null ||
                     this._filesEspelhoPonto.Count == 0)
-                {
                     return null;
-                    //throw new NullReferenceException(
-                    //    nameof(
-                    //        this._filesEspelhoPonto));
-                }
 
                 var espelhosPontoResult = new List<EspelhoPontoResult>();
 
@@ -262,8 +252,7 @@
                                 Nome = line.Substring(11, 40).Trim(),
                                 DescricaoSetor = line.Substring(57, 34).Trim(),
                                 CargaHoraria = line.Substring(113, 6).Trim().Replace(":", "."),
-                                Cnpj = this.replaceSetorByCnpj(
-                                    line.Substring(121, 13).Trim()),
+                                Cnpj = "",
                                 RazaoSocial = this.replaceSetorByRazaoSocial(
                                     line.Substring(121, 13).Trim()),
                                 Competencia = line.Substring(134, 7).Trim(),
@@ -387,6 +376,10 @@
                                 SerieCtps = line.Substring(276, 6).Trim(),
                                 UfCtps = line.Substring(283, 2).Trim(),
                                 Rg = line.Substring(286, 15).Trim(),
+                                Cnpj = line.Substring(304, 18).Trim(),
+                                DescricaoCargo = line.Substring(323, 30).Trim(),
+                                DescricaoSetor = line.Substring(353, 25).Trim(),
+                                SalarioNominal = line.Substring(421, 13).Trim(),
                             });
                     }
                 }
@@ -404,13 +397,15 @@
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>
-        private string replaceSetorByCnpj(string content)
-        {
-            if (content.Trim().ToUpper() == "MATRIZ")
-                return "07718633000189";
+        //private string replaceSetorByCnpj(string content)
+        //{
+        //    if (content.Trim().ToUpper() == "MATRIZ")
+        //        return "07718633000189";
+        //    else if (content.Trim().ToUpper() == "FIL 007")
+        //        return "07924408000875";
 
-            return string.Empty;
-        }
+        //    return string.Empty;
+        //}
 
         /// <summary>
         /// 
