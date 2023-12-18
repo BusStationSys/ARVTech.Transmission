@@ -46,6 +46,18 @@
 
         public string DescricaoSetor { get; set; }
 
+        public string FormaPagamento { get; set; }
+
+        public string Banco { get; set; }
+
+        public string Agencia { get; set; }
+
+        public string Conta { get; set; }
+        
+        public string DvConta { get; set; }
+
+        public string CargaHoraria { get; set; }
+
         public string SalarioNominal { get; set; }
     }
 }

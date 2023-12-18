@@ -2,19 +2,11 @@
 {
     public class EspelhoPontoResult
     {
-        public string Cnpj { get; set; }
-
-        public string CargaHoraria { get; set; }
-
         public string Competencia { get; set; }
-
-        public string DescricaoSetor { get; set; }
 
         public string Matricula { get; set; }
 
         public string Nome { get; set; }
-
-        public string RazaoSocial { get; set; }
 
         public List<EspelhoPontoMarcacaoResult> Marcacoes { get; set; }
 

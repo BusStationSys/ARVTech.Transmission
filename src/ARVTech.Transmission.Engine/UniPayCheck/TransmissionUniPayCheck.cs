@@ -61,60 +61,53 @@
         /// <param name="pathDirectoryOrFileName">Path`s Directory or Filename to be processed. If it is a Directory, all files that are there will be considered. Otherwise, if it is a single file, it will only be considered.</param>
         public TransmissionUniPayCheck(string pathDirectoryOrFileName)
         {
-            try
+            if (string.IsNullOrEmpty(pathDirectoryOrFileName))
             {
-                if (string.IsNullOrEmpty(pathDirectoryOrFileName))
-                {
-                    throw new ArgumentNullException(
-                        nameof(
-                            pathDirectoryOrFileName));
-                }
-
-                this._filesMatricula = new List<string>();
-                this._filesDemonstrativoPagamento = new List<string>();
-                this._filesEspelhoPonto = new List<string>();
-
-                if (File.Exists(pathDirectoryOrFileName))   // Is File (Individual).
-                {
-                    this._filesMatricula.Add(
-                        pathDirectoryOrFileName);
-
-                    this._filesDemonstrativoPagamento.Add(
-                        pathDirectoryOrFileName);
-
-                    this._filesEspelhoPonto.Add(
-                        pathDirectoryOrFileName);
-
-                    this._isFile = true;
-                }
-                else if (Directory.Exists(pathDirectoryOrFileName)) // Is Folder (Collective).
-                {
-                    this._filesMatricula = Directory.EnumerateFiles(
-                        pathDirectoryOrFileName,
-                        this._searchPatternMatricula,
-                        SearchOption.TopDirectoryOnly).ToList();
-
-                    this._filesDemonstrativoPagamento = Directory.EnumerateFiles(
-                        pathDirectoryOrFileName,
-                        this._searchPatternDemonstrativoPagamento,
-                        SearchOption.TopDirectoryOnly).ToList();
-
-                    this._filesEspelhoPonto = Directory.EnumerateFiles(
-                        pathDirectoryOrFileName,
-                        this._searchPatternEspelhoPonto,
-                        SearchOption.TopDirectoryOnly).ToList();
-
-                    this._isDirectory = true;
-                }
-                else
-                    throw new FileNotFoundException($@"Diretório ou Arquivo {pathDirectoryOrFileName} não encontrado.");
-
-                this._pathDirectoryOrFileName = pathDirectoryOrFileName;
+                throw new ArgumentNullException(
+                    nameof(
+                        pathDirectoryOrFileName));
             }
-            catch
+
+            this._filesMatricula = new List<string>();
+            this._filesDemonstrativoPagamento = new List<string>();
+            this._filesEspelhoPonto = new List<string>();
+
+            if (File.Exists(pathDirectoryOrFileName))   // Is File (Individual).
             {
-                throw;
+                this._filesMatricula.Add(
+                    pathDirectoryOrFileName);
+
+                this._filesDemonstrativoPagamento.Add(
+                    pathDirectoryOrFileName);
+
+                this._filesEspelhoPonto.Add(
+                    pathDirectoryOrFileName);
+
+                this._isFile = true;
             }
+            else if (Directory.Exists(pathDirectoryOrFileName)) // Is Folder (Collective).
+            {
+                this._filesMatricula = Directory.EnumerateFiles(
+                    pathDirectoryOrFileName,
+                    this._searchPatternMatricula,
+                    SearchOption.TopDirectoryOnly).ToList();
+
+                this._filesDemonstrativoPagamento = Directory.EnumerateFiles(
+                    pathDirectoryOrFileName,
+                    this._searchPatternDemonstrativoPagamento,
+                    SearchOption.TopDirectoryOnly).ToList();
+
+                this._filesEspelhoPonto = Directory.EnumerateFiles(
+                    pathDirectoryOrFileName,
+                    this._searchPatternEspelhoPonto,
+                    SearchOption.TopDirectoryOnly).ToList();
+
+                this._isDirectory = true;
+            }
+            else
+                throw new FileNotFoundException($@"Diretório ou Arquivo {pathDirectoryOrFileName} não encontrado.");
+
+            this._pathDirectoryOrFileName = pathDirectoryOrFileName;
         }
 
         /// <summary>
@@ -250,11 +243,6 @@
                             {
                                 Matricula = line.Substring(1, 10).Trim(),
                                 Nome = line.Substring(11, 40).Trim(),
-                                DescricaoSetor = line.Substring(57, 34).Trim(),
-                                CargaHoraria = line.Substring(113, 6).Trim().Replace(":", "."),
-                                Cnpj = "",
-                                RazaoSocial = this.replaceSetorByRazaoSocial(
-                                    line.Substring(121, 13).Trim()),
                                 Competencia = line.Substring(134, 7).Trim(),
                             };
 
@@ -280,8 +268,7 @@
                                 DebitoBH = line.Substring(126, 5).Trim(),
                             };
 
-                            if (espelhoPonto.Marcacoes is null)
-                                espelhoPonto.Marcacoes = new List<EspelhoPontoMarcacaoResult>();
+                            espelhoPonto.Marcacoes ??= new List<EspelhoPontoMarcacaoResult>();
 
                             espelhoPonto.Marcacoes.Add(
                                 espelhoPontoMarcacaoResult);
@@ -379,6 +366,11 @@
                                 Cnpj = line.Substring(304, 18).Trim(),
                                 DescricaoCargo = line.Substring(323, 30).Trim(),
                                 DescricaoSetor = line.Substring(353, 25).Trim(),
+                                FormaPagamento = line.Substring(393, 1).Trim(),
+                                Banco = line.Substring(395, 4).Trim(),
+                                Agencia = line.Substring(400, 5).Trim(),
+                                Conta = line.Substring(406, 12).Trim(),
+                                DvConta = line.Substring(419, 1).Trim(),
                                 SalarioNominal = line.Substring(421, 13).Trim(),
                             });
                     }
@@ -390,34 +382,6 @@
             {
                 throw;
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="content"></param>
-        /// <returns></returns>
-        //private string replaceSetorByCnpj(string content)
-        //{
-        //    if (content.Trim().ToUpper() == "MATRIZ")
-        //        return "07718633000189";
-        //    else if (content.Trim().ToUpper() == "FIL 007")
-        //        return "07924408000875";
-
-        //    return string.Empty;
-        //}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="content"></param>
-        /// <returns></returns>
-        private string replaceSetorByRazaoSocial(string content)
-        {
-            if (content.Trim().ToUpper() == "MATRIZ")
-                return "UNIDASUL DIST ALIMENTICIA S.A. MTZ";
-
-            return string.Empty;
         }
     }
 }
