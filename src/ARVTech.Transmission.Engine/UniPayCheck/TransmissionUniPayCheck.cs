@@ -158,6 +158,7 @@
                                 Uf = line.Substring(235, 2).Trim(),
                                 Email = line.Substring(239, 100).Trim(),
                                 Telefone = line.Substring(339, 23).Trim(),
+                                BandeiraComercial = line.Substring(362, 30).Trim(),
                             });
                     }
                 }
