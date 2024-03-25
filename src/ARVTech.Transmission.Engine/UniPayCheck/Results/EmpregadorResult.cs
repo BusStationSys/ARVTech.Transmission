@@ -26,6 +26,6 @@
 
         public string Telefone { get; set; }
 
-        public string BandeiraComercial { get; set; }
+        public string UnidadeNegocio { get; set; }
     }
 }
