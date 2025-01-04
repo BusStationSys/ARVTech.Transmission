@@ -171,6 +171,41 @@
             }
         }
 
+        public string GetConteudoEmpregadores()
+        {
+            try
+            {
+                if (this._filesEmpregador is null ||
+                    this._filesEmpregador.Count == 0)
+                    return null;
+
+                var conteudo = string.Empty;
+
+                foreach (var fileEmpregador in this._filesEmpregador)
+                {
+                    if (!string.IsNullOrEmpty(conteudo))
+                        conteudo = string.Concat(
+                            conteudo,
+                            Environment.NewLine);
+
+                    var lines = string.Join(
+                        Environment.NewLine, 
+                        File.ReadAllLines(
+                            fileEmpregador));
+
+                    conteudo = string.Concat(
+                        conteudo,
+                        lines);
+                }
+
+                return conteudo;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         /// <summary>
         /// Collective or Individual.
         /// </summary>
@@ -228,6 +263,41 @@
                 }
 
                 return matriculasResult;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public string GetConteudoMatriculas()
+        {
+            try
+            {
+                if (this._filesMatricula is null ||
+                    this._filesMatricula.Count == 0)
+                    return null;
+
+                var conteudo = string.Empty;
+
+                foreach (var fileMatricula in this._filesMatricula)
+                {
+                    if (!string.IsNullOrEmpty(conteudo))
+                        conteudo = string.Concat(
+                            conteudo,
+                            Environment.NewLine);
+
+                    var lines = string.Join(
+                        Environment.NewLine,
+                        File.ReadAllLines(
+                            fileMatricula));
+
+                    conteudo = string.Concat(
+                        conteudo,
+                        lines);
+                }
+
+                return conteudo;
             }
             catch
             {
