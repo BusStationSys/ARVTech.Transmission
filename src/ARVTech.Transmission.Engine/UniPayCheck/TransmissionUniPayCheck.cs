@@ -126,50 +126,50 @@
         /// Collective or Individual.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<EmpregadorResult> GetEmpregadores()
-        {
-            try
-            {
-                if (this._filesEmpregador is null ||
-                    this._filesEmpregador.Count == 0)
-                    return null;
+        //public IEnumerable<EmpregadorResult> GetEmpregadores()
+        //{
+        //    try
+        //    {
+        //        if (this._filesEmpregador is null ||
+        //            this._filesEmpregador.Count == 0)
+        //            return null;
 
-                var empregadoresResult = new List<EmpregadorResult>();
+        //        var empregadoresResult = new List<EmpregadorResult>();
 
-                foreach (var fileEmpregador in this._filesEmpregador)
-                {
-                    var lines = File.ReadAllLines(
-                        fileEmpregador);
+        //        foreach (var fileEmpregador in this._filesEmpregador)
+        //        {
+        //            var lines = File.ReadAllLines(
+        //                fileEmpregador);
 
-                    foreach (var line in lines)
-                    {
-                        empregadoresResult.Add(
-                            new EmpregadorResult()
-                            {
-                                Cnpj = line.Substring(0, 19).Trim(),
-                                RazaoSocial = line.Substring(19, 40).Trim(),
-                                DataFundacao = line.Substring(59, 10).Trim(),
-                                Cep = line.Substring(69, 10).Trim(),
-                                Logradouro = line.Substring(79, 40).Trim(),
-                                NumeroLogradouro = line.Substring(119, 6).Trim(),
-                                Complemento = line.Substring(125, 40).Trim(),
-                                Bairro = line.Substring(165, 40).Trim(),
-                                Cidade = line.Substring(205, 30).Trim(),
-                                Uf = line.Substring(235, 2).Trim(),
-                                Email = line.Substring(239, 100).Trim(),
-                                Telefone = line.Substring(339, 23).Trim(),
-                                UnidadeNegocio = line.Substring(362, 30).Trim(),
-                            });
-                    }
-                }
+        //            foreach (var line in lines)
+        //            {
+        //                empregadoresResult.Add(
+        //                    new EmpregadorResult()
+        //                    {
+        //                        Cnpj = line.Substring(0, 19).Trim(),
+        //                        RazaoSocial = line.Substring(19, 40).Trim(),
+        //                        DataFundacao = line.Substring(59, 10).Trim(),
+        //                        Cep = line.Substring(69, 10).Trim(),
+        //                        Logradouro = line.Substring(79, 40).Trim(),
+        //                        NumeroLogradouro = line.Substring(119, 6).Trim(),
+        //                        Complemento = line.Substring(125, 40).Trim(),
+        //                        Bairro = line.Substring(165, 40).Trim(),
+        //                        Cidade = line.Substring(205, 30).Trim(),
+        //                        Uf = line.Substring(235, 2).Trim(),
+        //                        Email = line.Substring(239, 100).Trim(),
+        //                        Telefone = line.Substring(339, 23).Trim(),
+        //                        UnidadeNegocio = line.Substring(362, 30).Trim(),
+        //                    });
+        //            }
+        //        }
 
-                return empregadoresResult;
-            }
-            catch
-            {
-                throw;
-            }
-        }
+        //        return empregadoresResult;
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //}
 
         public string GetConteudoEmpregadores()
         {
@@ -210,65 +210,65 @@
         /// Collective or Individual.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<MatriculaResult> GetMatriculas()
-        {
-            try
-            {
-                if (this._filesMatricula is null ||
-                    this._filesMatricula.Count == 0)
-                    return null;
+        //public IEnumerable<MatriculaResult> GetMatriculas()
+        //{
+        //    try
+        //    {
+        //        if (this._filesMatricula is null ||
+        //            this._filesMatricula.Count == 0)
+        //            return null;
 
-                var matriculasResult = new List<MatriculaResult>();
+        //        var matriculasResult = new List<MatriculaResult>();
 
-                foreach (var fileMatricula in this._filesMatricula)
-                {
-                    var lines = File.ReadAllLines(
-                        fileMatricula);
+        //        foreach (var fileMatricula in this._filesMatricula)
+        //        {
+        //            var lines = File.ReadAllLines(
+        //                fileMatricula);
 
-                    foreach (var line in lines)
-                    {
-                        matriculasResult.Add(
-                            new MatriculaResult()
-                            {
-                                Matricula = line.Substring(0, 8).Trim(),
-                                Nome = line.Substring(9, 35).Trim(),
-                                DataNascimento = line.Substring(45, 10).Trim(),
-                                Cep = line.Substring(58, 10).Trim(),
-                                Email = line.Substring(69, 28).Trim(),
-                                Telefone = line.Substring(98, 27).Trim(),
-                                Cpf = line.Substring(126, 14).Trim(),
-                                DataDemissao = line.Substring(141, 10).Trim(),
-                                DataAdmissao = line.Substring(152, 10).Trim(),
-                                Complemento = line.Substring(163, 23).Trim(),
-                                NumeroLogradouro = line.Substring(185, 6).Trim(),
-                                Bairro = line.Substring(192, 20).Trim(),
-                                Logradouro = line.Substring(213, 30).Trim(),
-                                Cidade = line.Substring(244, 18).Trim(),
-                                Uf = line.Substring(263, 2).Trim(),
-                                NumeroCtps = line.Substring(266, 9).Trim(),
-                                SerieCtps = line.Substring(276, 6).Trim(),
-                                UfCtps = line.Substring(283, 2).Trim(),
-                                Rg = line.Substring(286, 15).Trim(),
-                                Cnpj = line.Substring(304, 18).Trim(),
-                                DescricaoCargo = line.Substring(323, 30).Trim(),
-                                DescricaoSetor = line.Substring(353, 25).Trim(),
-                                FormaPagamento = line.Substring(393, 1).Trim(),
-                                Banco = line.Substring(395, 4).Trim(),
-                                Agencia = line.Substring(400, 5).Trim(),
-                                Conta = line.Substring(406, 12).Trim(),
-                                DvConta = line.Substring(419, 1).Trim(),
-                                SalarioNominal = line.Substring(421, 13).Trim(),
-                            });
-                    }
-                }
+        //            foreach (var line in lines)
+        //            {
+        //                matriculasResult.Add(
+        //                    new MatriculaResult()
+        //                    {
+        //                        Matricula = line.Substring(0, 8).Trim(),
+        //                        Nome = line.Substring(9, 35).Trim(),
+        //                        DataNascimento = line.Substring(45, 10).Trim(),
+        //                        Cep = line.Substring(58, 10).Trim(),
+        //                        Email = line.Substring(69, 28).Trim(),
+        //                        Telefone = line.Substring(98, 27).Trim(),
+        //                        Cpf = line.Substring(126, 14).Trim(),
+        //                        DataDemissao = line.Substring(141, 10).Trim(),
+        //                        DataAdmissao = line.Substring(152, 10).Trim(),
+        //                        Complemento = line.Substring(163, 23).Trim(),
+        //                        NumeroLogradouro = line.Substring(185, 6).Trim(),
+        //                        Bairro = line.Substring(192, 20).Trim(),
+        //                        Logradouro = line.Substring(213, 30).Trim(),
+        //                        Cidade = line.Substring(244, 18).Trim(),
+        //                        Uf = line.Substring(263, 2).Trim(),
+        //                        NumeroCtps = line.Substring(266, 9).Trim(),
+        //                        SerieCtps = line.Substring(276, 6).Trim(),
+        //                        UfCtps = line.Substring(283, 2).Trim(),
+        //                        Rg = line.Substring(286, 15).Trim(),
+        //                        Cnpj = line.Substring(304, 18).Trim(),
+        //                        DescricaoCargo = line.Substring(323, 30).Trim(),
+        //                        DescricaoSetor = line.Substring(353, 25).Trim(),
+        //                        FormaPagamento = line.Substring(393, 1).Trim(),
+        //                        Banco = line.Substring(395, 4).Trim(),
+        //                        Agencia = line.Substring(400, 5).Trim(),
+        //                        Conta = line.Substring(406, 12).Trim(),
+        //                        DvConta = line.Substring(419, 1).Trim(),
+        //                        SalarioNominal = line.Substring(421, 13).Trim(),
+        //                    });
+        //            }
+        //        }
 
-                return matriculasResult;
-            }
-            catch
-            {
-                throw;
-            }
-        }
+        //        return matriculasResult;
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //}
 
         public string GetConteudoMatriculas()
         {
@@ -508,6 +508,41 @@
                 }
 
                 return espelhosPontoResult;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public string GetConteudoEspelhosPonto()
+        {
+            try
+            {
+                if (this._filesEspelhoPonto is null ||
+                    this._filesEspelhoPonto.Count == 0)
+                    return null;
+
+                var conteudo = string.Empty;
+
+                foreach (var fileEspelhoPonto in this._filesEspelhoPonto)
+                {
+                    if (!string.IsNullOrEmpty(conteudo))
+                        conteudo = string.Concat(
+                            conteudo,
+                            Environment.NewLine);
+
+                    var lines = string.Join(
+                        Environment.NewLine,
+                        File.ReadAllLines(
+                            fileEspelhoPonto));
+
+                    conteudo = string.Concat(
+                        conteudo,
+                        lines);
+                }
+
+                return conteudo;
             }
             catch
             {
