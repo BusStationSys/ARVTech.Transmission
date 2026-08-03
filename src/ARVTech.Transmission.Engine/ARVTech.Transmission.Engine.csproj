@@ -16,4 +16,8 @@
     <OutputPath>bin\</OutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Destin\" />
+  </ItemGroup>
+
 </Project>
