@@ -1,4 +1,4 @@
-﻿namespace ARVTech.Transmission.Engine.UniPayCheck.Results
+﻿namespace ARVTech.Transmission.Engine.PayCheck.Results
 {
     public class EmpregadorResult
     {

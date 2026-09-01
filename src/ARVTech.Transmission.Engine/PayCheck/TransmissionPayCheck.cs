@@ -1,4 +1,4 @@
-﻿namespace ARVTech.Transmission.Engine.UniPayCheck
+﻿namespace ARVTech.Transmission.Engine.PayCheck
 {
     using System;
     using System.Collections.Generic;
@@ -6,9 +6,9 @@
     using System.Linq;
     using System.Runtime.InteropServices;
     using System.Text;
-    using ARVTech.Transmission.Engine.UniPayCheck.Results;
+    using ARVTech.Transmission.Engine.PayCheck.Results;
 
-    public class TransmissionUniPayCheck
+    public class TransmissionPayCheck
     {
         private readonly bool _isDirectory = false;
         private readonly bool _isFile = false;
@@ -59,10 +59,10 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TransmissionUniPayCheck"/> class.
+        /// Initializes a new instance of the <see cref="TransmissionPayCheck"/> class.
         /// </summary>
         /// <param name="pathDirectoryOrFileName">Path`s Directory or Filename to be processed. If it is a Directory, all files that are there will be considered. Otherwise, if it is a single file, it will only be considered.</param>
-        public TransmissionUniPayCheck(string pathDirectoryOrFileName)
+        public TransmissionPayCheck(string pathDirectoryOrFileName)
         {
             if (string.IsNullOrEmpty(pathDirectoryOrFileName))
             {
